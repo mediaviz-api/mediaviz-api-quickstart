@@ -78,16 +78,12 @@ def preprocess_image(headers, file_path, file_name, max_size=400 * 1024, max_dim
     """
     try:
         mime_type, _ = mimetypes.guess_type(file_name)
-        # Create a copy of headers to avoid modifying the original
         headers_copy = headers.copy()
 
-        # Open the image file once
         with Image.open(file_path) as img:
-            # Store the original format and dimensions
             img_format = img.format
             original_width, original_height = img.size
 
-            # Get all EXIF data
             exif_data = {}
             if hasattr(img, '_getexif') and img._getexif():
                 exif_info = img._getexif()
@@ -96,14 +92,12 @@ def preprocess_image(headers, file_path, file_name, max_size=400 * 1024, max_dim
                         decoded = TAGS.get(tag, tag)
                         exif_data[decoded] = value
 
-            # Extract GPS info if available
+            # GPS
             gps_info = {}
             if 'GPSInfo' in exif_data:
                 for key, value in exif_data['GPSInfo'].items():
                     decoded = GPSTAGS.get(key, key)
                     gps_info[decoded] = value
-
-            # Format GPS coordinates if available
             latitude = None
             longitude = None
             if gps_info:
@@ -121,7 +115,7 @@ def preprocess_image(headers, file_path, file_name, max_size=400 * 1024, max_dim
                     if lon_ref != 'E':
                         longitude = -longitude
 
-            # Format date taken if available
+            # Date Taken
             date_taken = None
             if 'DateTimeOriginal' in exif_data:
                 date_str = exif_data['DateTimeOriginal']
@@ -130,7 +124,7 @@ def preprocess_image(headers, file_path, file_name, max_size=400 * 1024, max_dim
                 except ValueError:
                     date_taken = date_str
 
-            # Resolution information
+            # Resolution
             x_resolution = None
             y_resolution = None
             if 'XResolution' in exif_data:
@@ -138,7 +132,6 @@ def preprocess_image(headers, file_path, file_name, max_size=400 * 1024, max_dim
             if 'YResolution' in exif_data:
                 y_resolution = exif_data['YResolution']
 
-            # Add metadata to headers
             headers_copy['x-size'] = f"{original_width}x{original_height}"
             headers_copy['x-source-resolution-x'] = str(x_resolution) if x_resolution else None
             headers_copy['x-source-resolution-y'] = str(y_resolution) if y_resolution else None
@@ -163,7 +156,6 @@ def preprocess_image(headers, file_path, file_name, max_size=400 * 1024, max_dim
                 buffer.seek(0)
                 resized_image_bytes = buffer.getvalue()
 
-                # Create the JSON object for API submission
                 base64_content = base64.b64encode(resized_image_bytes).decode('utf-8')
                 result_json = {
                     "file_content": base64_content,
@@ -186,7 +178,7 @@ def convert_to_degrees(value):
 
 
 if __name__ == '__main__':
-    directory = './test_photos'
+    directory = getenv('FOLDER_NAME')
     url = getenv('MEDIAVIZ_PHOTO_UPLOAD_URL')
     bucket_name = getenv('MEDIAVIZ_BUCKET_NAME')
     token = getenv('MEDIAVIZ_API_REFRESH_TOKEN')
