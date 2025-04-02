@@ -2,7 +2,7 @@
 Upload photos and request preliminary analysis from the MediaViz API.
 
 Steps:
-1. Clone into the repo using SSH: git clone git@github.com:imaige/MediaViz-API-Photo-Uploader.git
+1. Clone into the repo using HTTPS: git clone https://github.com/imaige/MediaViz-API-Photo-Uploader
 2. Navigate to the project root in your command line
 3. Install project requirements: pip3 install -r requirements.txt
 4. Add your folder of photos to the root of the project.
