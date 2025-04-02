@@ -9,7 +9,7 @@ Steps:
 5. Create .env file using the window navigator, or using the command line: touch .env
 6. Add the required items to your .env file:
     MEDIAVIZ_PHOTO_UPLOAD_URL=[upload_URL]
-    MEDIAVIZ_BUCKET_NAME=[project_table_name]
+    MEDIAVIZ_BUCKET_NAME=[z-photos-X-XXXX-XXXXXXXX-XXXXXXXXX-XXX]
     MEDIAVIZ_API_REFRESH_TOKEN=[refresh_token]
     MEDIAVIZ_USER_ID=[user_id]
     MEDIAVIZ_COMPANY_ID=[company_id]
