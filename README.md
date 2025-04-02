@@ -4,7 +4,7 @@ Upload photos and request preliminary analysis from the MediaViz API.
 Steps:
 1. Clone into the repo using HTTPS: git clone https://github.com/imaige/MediaViz-API-Photo-Uploader
 2. Navigate to the project root in your command line
-3. Set up and the project and install project requirements by running: sh setup.sh
+3. Set up and the project and install project requirements by running: sh setup3.sh
 4. Add your folder of photos to the root of the project.
 5. Create .env file using the window navigator, or using the command line: touch .env
 6. Add the required items to your .env file: \
