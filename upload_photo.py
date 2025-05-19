@@ -19,6 +19,7 @@ logger.setLevel(logging.INFO)
 def upload_photo(
         directory: str,
         file_name: str,
+        photo_index: str,
         url: str,
         bucket_name: str,
         models: str,
@@ -36,6 +37,7 @@ def upload_photo(
         'Authorization': token,
         'x-bucket-name': bucket_name,
         'x-file-name': file_name,
+        'x-photo-index': photo_index,
         'x-models': models,
         'x-company-id': company_id,
         'x-user-id': user_id,

@@ -24,20 +24,23 @@ if __name__ == '__main__':
     # models = "image_comparison_model, blur_model, colors_model, face_recognition_model, feature_extraction_model"
     # models = "colors_model, feature_extraction_model, image_classification_model"
     # models = "face_recognition_model, feature_extraction_model, image_classification_model"
-    models = "blur_model"
+    # models = "blur_model, colors_model, face_recognition_model"
+    # models = "feature_extraction_model, blur_model"
     # all
-    # models = "image_comparison_model, blur_model, colors_model, face_recognition_model, feature_extraction_model, image_classification_model"
-    for file_name in listdir(directory):
+    models = "image_comparison_model, blur_model, colors_model, face_recognition_model, feature_extraction_model, image_classification_model"
+    permitted_file_types = [
+        '.jpg',
+        '.jpeg',
+        '.png'
+    ]
+    for index, file_name in enumerate(listdir(directory), start=1):
         ext = path.splitext(file_name)[1]
-        permitted_file_types = [
-            '.jpg',
-            '.jpeg',
-            '.png'
-        ]
         if ext.lower() in permitted_file_types:
+            logger.info(f"Uploading photo {index}: {file_name}")
             upload_photo(
                 directory,
                 file_name,
+                str(index),
                 url,
                 bucket_name,
                 models,
@@ -47,3 +50,5 @@ if __name__ == '__main__':
                 None,
                 token=token
             )
+        else:
+            logger.error(f"Failed to upload photo {index} due to incorrect extension: {ext}")
