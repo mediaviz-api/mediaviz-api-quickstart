@@ -22,10 +22,15 @@ def upload_photo(
         photo_index: str,
         url: str,
         bucket_name: str,
-        models: str,
+        # models: str,
         company_id: str,
         user_id: str,
         project_table_name: str,
+        blur: bool,
+        colors: bool,
+        face_recognition: bool,
+        image_classification: bool,
+        image_comparison: bool,
         client_side_id: str = None,
         token: str = None
 ):
@@ -38,7 +43,7 @@ def upload_photo(
         'x-bucket-name': bucket_name,
         'x-file-name': file_name,
         'x-photo-index': photo_index,
-        'x-models': models,
+        # 'x-models': models,
         'x-company-id': company_id,
         'x-user-id': user_id,
         'x-project-table-name': project_table_name,
@@ -46,6 +51,11 @@ def upload_photo(
         'x-title': file_name,
         'x-file-path': file_path,
         'x-description': None,
+        'x-blur': blur,
+        'x-colors': colors,
+        'x-face-recognition': face_recognition,
+        'x-image-classification': image_classification,
+        'x-image-comparison': image_comparison
     }
     img_json, headers = preprocess_image(headers_initial, file_path, file_name)
     print(f"headers: {headers}")

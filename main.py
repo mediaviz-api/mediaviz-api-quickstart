@@ -17,23 +17,18 @@ if __name__ == '__main__':
     user_id = getenv('MEDIAVIZ_USER_ID')
     company_id = getenv('MEDIAVIZ_COMPANY_ID')
 
-    # models = "image_comparison_model, face_recognition_model, blur_model, colors_model"
-    # models = "image_comparison_model, blur_model, colors_model, feature_extraction_model"
-    # models = "image_comparison_model, feature_extraction_model, blur_model"
-    # models = "image_comparison_model, feature_extraction_model, colors_model"
-    # models = "image_comparison_model, blur_model, colors_model, face_recognition_model, feature_extraction_model"
-    # models = "colors_model, feature_extraction_model, image_classification_model"
-    # models = "face_recognition_model, feature_extraction_model, image_classification_model"
-    # models = "blur_model, colors_model, face_recognition_model"
-    # models = "feature_extraction_model, blur_model"
-    # all
-    models = "image_comparison_model, blur_model, colors_model, face_recognition_model, feature_extraction_model, image_classification_model"
+    blur = 'True'
+    colors = 'True'
+    face_recognition = 'True'
+    feature_extraction = 'True'
+    image_classification = 'True'
+    image_comparison = 'True'
     permitted_file_types = [
         '.jpg',
         '.jpeg',
         '.png'
     ]
-    for index, file_name in enumerate(listdir(directory), start=1):
+    for index, file_name in enumerate(listdir(directory), start=203): # 69 for test dev collection z-photos-1-83c8ac03-38ea-4d2b-8306-5f6802e383e8
         ext = path.splitext(file_name)[1]
         if ext.lower() in permitted_file_types:
             logger.info(f"Uploading photo {index}: {file_name}")
@@ -43,10 +38,15 @@ if __name__ == '__main__':
                 str(index),
                 url,
                 bucket_name,
-                models,
+                #models,
                 company_id,
                 user_id,
                 bucket_name,
+                blur,
+                colors,
+                face_recognition,
+                image_classification,
+                image_comparison,
                 None,
                 token=token
             )
