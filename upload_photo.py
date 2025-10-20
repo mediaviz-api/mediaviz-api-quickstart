@@ -12,8 +12,11 @@ import datetime
 from os import getenv, path, listdir
 import logging
 
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(name)s: %(message)s"
+)
+logger = logging.getLogger(__name__)
 
 
 def upload_photo(
@@ -22,38 +25,34 @@ def upload_photo(
         photo_index: str,
         url: str,
         bucket_name: str,
-        # models: str,
         company_id: str,
         user_id: str,
         project_table_name: str,
         blur: bool,
         colors: bool,
         face_recognition: bool,
+        feature_extraction: bool,
         image_classification: bool,
         image_comparison: bool,
         client_side_id: str = None,
         token: str = None
 ):
-    # TODO: figure out how to pass client_side_id
     file_path = path.join(directory, file_name)
     print(f"file path is: {file_path}")
     headers_initial = {
         'Content-Type': "application/json",  # new
         'Authorization': token,
         'x-bucket-name': bucket_name,
-        'x-file-name': file_name,
         'x-photo-index': photo_index,
-        # 'x-models': models,
         'x-company-id': company_id,
         'x-user-id': user_id,
         'x-project-table-name': project_table_name,
         'x-client-side-id': client_side_id,
         'x-title': file_name,
-        'x-file-path': file_path,
-        'x-description': None,
         'x-blur': blur,
         'x-colors': colors,
         'x-face-recognition': face_recognition,
+        'x-feature-extraction': feature_extraction,
         'x-image-classification': image_classification,
         'x-image-comparison': image_comparison
     }
@@ -168,7 +167,7 @@ def preprocess_image(headers, file_path, file_name, max_size=400 * 1024, max_dim
                 base64_content = base64.b64encode(resized_image_bytes).decode('utf-8')
                 result_json = {
                     "file_content": base64_content,
-                    "file_name": file_name,
+                    "file_path": file_path,
                     "mimetype": mime_type
                 }
 

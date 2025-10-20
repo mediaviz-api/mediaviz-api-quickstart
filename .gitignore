@@ -1,3 +1,11 @@
+# test photo sets
+mediumTestSet/
+notThatSmallTestSet/
+smallTestSet/
+testPhotoSet/
+unused_test_photos/
+yearbookTestSet/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

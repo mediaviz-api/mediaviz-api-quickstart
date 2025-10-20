@@ -5,8 +5,11 @@ from upload_photo import upload_photo
 
 load_dotenv()
 
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(name)s: %(message)s"
+)
+logger = logging.getLogger(__name__)
 
 
 if __name__ == '__main__':
@@ -28,7 +31,7 @@ if __name__ == '__main__':
         '.jpeg',
         '.png'
     ]
-    for index, file_name in enumerate(listdir(directory), start=203): # 69 for test dev collection z-photos-1-83c8ac03-38ea-4d2b-8306-5f6802e383e8
+    for index, file_name in enumerate(listdir(directory), start=25):
         ext = path.splitext(file_name)[1]
         if ext.lower() in permitted_file_types:
             logger.info(f"Uploading photo {index}: {file_name}")
@@ -38,13 +41,13 @@ if __name__ == '__main__':
                 str(index),
                 url,
                 bucket_name,
-                #models,
                 company_id,
                 user_id,
                 bucket_name,
                 blur,
                 colors,
                 face_recognition,
+                feature_extraction,
                 image_classification,
                 image_comparison,
                 None,
