@@ -14,5 +14,12 @@ Steps:
     MEDIAVIZ_USER_ID=[user_id] \
     MEDIAVIZ_COMPANY_ID=[company_id] \
     FOLDER_NAME=[your_folder_name] 
-7. Select the subset of models you would like to use by commenting/uncommenting one of the string options in the bottom section of the file that look like: models = "image_comparison_model, face_recognition_model, blur_model, colors_model"
-8. Run the script in your command line: python main.py
+7. Select the subset of models you would like to use by adjusting the model selection options to either 'True' or 'False' in main.py:
+    blur = 'True'
+    colors = 'True'
+    face_recognition = 'True'
+    feature_extraction = 'True'
+    image_classification = 'True'
+    image_comparison = 'True'
+   Note that these should be in string form, as shown above.
+9. Run the script in your command line: python main.py
