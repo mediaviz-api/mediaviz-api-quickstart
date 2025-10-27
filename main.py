@@ -31,7 +31,7 @@ if __name__ == '__main__':
         '.jpeg',
         '.png'
     ]
-    for index, file_name in enumerate(listdir(directory), start=25):
+    for index, file_name in enumerate(listdir(directory), start=1):
         ext = path.splitext(file_name)[1]
         if ext.lower() in permitted_file_types:
             logger.info(f"Uploading photo {index}: {file_name}")
